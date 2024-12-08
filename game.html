@@ -1,0 +1,2279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Hanalei+Fill&family=Modak&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik+Doodle+Shadow&family=Rubik+Doodle+Triangles&family=Rubik+Glitch+Pop&family=Rubik+Lines&family=Rubik+Moonrocks&family=Rubik+Pixels&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+    <title>GAME</title>
+    <style>
+        :root { 
+    --color: #000;
+}
+
+#bg-image {
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -10;
+    object-fit: cover;
+}
+
+.game-start {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    opacity: 0;
+    z-index: -100;
+    flex-direction: column;
+    gap: 20px;
+    animation: appearUp2 6s ease-in 16s forwards;
+}
+
+@keyframes appearUp2 {
+    0% {
+        opacity: 0;
+        z-index: 10;
+    }
+    20%, 100% {
+        opacity: 1;
+        z-index: 10;
+    }
+}
+
+#start-game {
+    background-image: url("https://i.ibb.co/Vgqch30/pokemon.jpg");
+    background-size: 100%;
+    animation: moveGradient 12s ease infinite, hue2 30s ease infinite;
+    border: 2px solid rgb(227, 212, 83);
+    background-color: rgba(216, 204, 94, 0.868);
+    box-shadow: 1px 2px 2px 1px #e9cd2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#how-play {
+    background-image: url("https://i.ibb.co/0Z8M7mJ/squirtle.png");
+    background-size: 100%;
+    animation: moveGradient2 10s linear infinite alternate-reverse, hue2 10s ease infinite;
+    border: 2px solid rgb(227, 212, 83);
+    background-color: rgba(216, 204, 94, 0.884);
+    box-shadow: 1px 2px 2px 1px #d8cb34;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-buttons {
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid rgb(220, 175, 175);
+    background-color: #f1d6d6;
+    box-shadow: 1px 2px 2px 1px #dd9696;
+    text-shadow: 2px 1px 1px #8a0af33f;
+    font-family: 'Rubik Lines';
+    color: #bc6af2;
+    font-weight: 800;
+    text-align: center;
+    width: 30vw;
+    height: 100px;
+    font-size: 1.5em;
+    animation: hue2 15s ease infinite alternate-reverse;
+}
+
+.play-buttons:hover {
+    box-shadow: none;
+    transform: translate(2px, 2px);
+}
+
+#start-game:hover {
+    box-shadow: none;
+}
+
+#how-play:hover {
+    box-shadow: none;
+}
+
+@keyframes hue2 {
+    from {
+      -webkit-filter: hue-rotate(0deg);
+    }
+    to {
+      -webkit-filter: hue-rotate(-360deg);
+    }
+}
+
+#help {
+    background-image: url('https://i.ibb.co/N6jKz3S/pokball.jpg');
+    background-size: 100%;
+    background-position: center;
+    opacity: 0.5;
+    height: 70px;
+    width: 70px;
+    z-index: 15;
+    border-style: none;
+    border-radius: 50%;
+    position: fixed;
+    right: 10px;
+    display: none;
+    top: 10px;
+    border: 2px solid#241d1d;
+}
+
+.help-box {
+    height: 80vh;
+    width: calc(12vw + 12vh * 2);
+    display: flex;
+    padding-top: 1%;
+    background-color: #34fcb3eb;
+    padding: 1%;
+    border-radius: 10px;
+    flex-direction: column;
+    border: 1px solid #fff;
+    justify-content: center;
+    align-items: center;
+}
+
+.help-img {
+    width: 170px;
+    height: 170px;
+    overflow: hidden;
+}
+
+#h-header {
+    text-align: center;
+    font-family: "Rubik Doodle Triangles";
+    color: #c2ef0f;
+    text-shadow: 2px 2px 1px #00000045;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.help-content {
+    height: 50%;
+    width: 95%;
+    padding-bottom: 5%;
+}
+
+#help-info {
+    font-size: 1.8vh;
+    font-family: 'Nunito';
+}
+
+#help-image {
+    width: 100%;
+    height: 100%;
+}
+
+#help-whole {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    display: none;
+    align-items: center;
+    z-index: 10;
+    justify-content: center;
+}
+
+#help:hover {
+    opacity: 1;
+    z-index: 10;
+}
+
+.card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    transform-style: preserve-3d;
+    perspective: 600px;
+    transition: 0.5s;
+    
+}
+
+.flipping {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-style: preserve-3d;
+    perspective: 600px;
+    transition: 0.5s;
+}
+
+#card1 {
+    animation: shiftLeft 1s 1.5s forwards;
+}
+
+#card2 {
+    animation: shiftRight 1s 1s forwards;
+}
+
+#card4 {
+    animation: shiftLeft2 1s 0.5s forwards;
+    z-index: 10;
+    display: none;
+}
+
+#card5 {
+    animation: shiftRight2 1s forwards;
+    z-index: 10;
+    display: none;
+}
+
+#card1:hover {
+    z-index: 100;
+}
+
+#card2:hover {
+    z-index: 100;
+}
+
+#card3:hover {
+    z-index: 100;
+}
+
+@keyframes shiftLeft {
+    to {
+        transform: translate(-200%, -60%);
+    }
+}
+
+@keyframes shiftLeft2 {
+    to {
+        transform: translate(-125%, -40%);
+    }
+}
+
+@keyframes shiftRight {
+    to {
+        position: absolute;
+        transform: translate(100%, -60%);
+    }
+}
+
+@keyframes shiftRight2 {
+    to {
+        position: absolute;
+        transform: translate(25%, -40%);
+    }
+}
+
+.card .front {
+    backface-visibility: hidden;
+    transform: rotateX(0deg);
+    transition: 0.5s;
+    box-shadow: 0 7px 14px rgba(0,0,0,0.2);
+}
+
+.flipping .frontier {
+    backface-visibility: hidden;
+    transform: rotateX(0deg);
+    transition: 0.5s;
+    box-shadow: 0 7px 14px rgba(0,0,0,0.2);
+}
+
+.flip:hover .front {
+    transform: rotateX(-180deg);
+}
+
+.flipping:hover .frontier {
+    transform: rotateX(-180deg);
+}
+
+@keyframes  moveLeft {
+    from {
+        transform: rotateX(0deg);
+    }
+    to {
+        transform: rotateX(-180deg);
+    }
+}
+
+@keyframes  moveBottom {
+    from {
+        transform: rotateY(-180deg);
+    }
+    to {
+        transform: translateY(110%);
+    }
+}
+
+#YouWin {
+    width: 100vw;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#YouJustWon {
+    height: 100vh;
+    margin: 0;
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100vw;
+    background-color: #000;
+    display: none;
+    z-index: 100;
+}
+
+.goHome {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-image: url('https://i.ibb.co/kQGCNBz/Card-Duel-img.png');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgb(220, 175, 175);
+    background-color: #f1d6d6;
+    box-shadow: 1px 2px 2px 1px #dd9696;
+    text-shadow: 2px 1px 1px #8a0af33f;
+    font-family: 'Rubik Lines';
+    color: #bc6af2;
+    font-weight: 800;
+    text-align: center;
+    width: 30vw;
+    height: 70px;
+    font-size: 1.5em;
+    animation: hue2 15s ease infinite alternate-reverse;    
+}
+
+#winHome {
+    border: 1px solid rgb(240, 233, 25);
+    background-color: #ede910;
+    box-shadow: 1px 2px 2px 1px #d1d404e2;
+}
+
+#loseHome {
+    border: 1px solid rgb(111, 240, 25);
+    background-color: #6dc624;
+    box-shadow: 1px 2px 2px 1px #17de28;
+}
+
+#winHome:hover {
+    box-shadow: none;
+    transform: translate(-49%, 1px);
+}
+
+#loseHome:hover {
+    box-shadow: none;
+    transform: translate(-49%, 1px);
+}
+
+#YouJustLost {
+    height: 100vh;
+    margin: 0;
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100vw;
+    display: none;
+    background-color: #000;
+}
+
+#YouLose {
+    width: 100vw;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#logo-game {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(45deg,#302f2f, #3d3b3b, #322d32);
+    position: absolute;
+    background-size: 400% 400%;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: moveGradient 10s ease infinite, appearUp 15s ease-in 1s forwards;
+    z-index: -1;
+    opacity: 0;
+}
+
+@keyframes moveGradient {
+    0%, 100% {
+        background-position: 0 100%;
+    }
+    50% {
+        background-position: 100% 12%;
+    }
+} 
+
+@keyframes moveGradient2 {
+    0%, 100% {
+        background-position: 100% 0;
+    }
+    50% {
+        background-position: 0 100%;
+    }
+} 
+
+@keyframes appearUp {
+    0%, 100% {
+        opacity: 0;
+    }
+    20%, 80% {
+        opacity: 0.85;
+    }
+}
+
+.logo {
+    width: 470px;
+    height: 470px;
+}
+
+#collection_of_cards {
+    display: none;
+    flex-direction: row;
+    width: 100vw;
+    gap: 20px;
+    position: fixed;
+}
+
+.card .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    transform: rotateX(180deg);
+    transition: 0.5s;
+    background-color: #fff;
+    background-image: url('https://i.ibb.co/N6jKz3S/pokball.jpg');
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    box-shadow: 0 7px 14px rgba(0,0,0,0.15);
+}
+
+.card .back:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    
+}
+
+.flip:hover .back {
+    transform: rotateX(0deg);
+    
+}
+
+.flipping .backer {
+    backface-visibility: hidden;
+    transform: rotateX(180deg);
+    transition: 0.5s;
+    background-attachment: fixed;
+    box-shadow: 0 7px 14px rgba(0,0,0,0.15);
+}
+
+.flipping .backer:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    
+}
+
+.flipping:hover .backer  {
+    transform: rotateX(0deg);
+    
+}
+
+@keyframes moveRight {
+    to {
+        transform: rotateX(-180deg);
+    }
+    to {
+        transform: rotateX(0deg);
+    }
+}
+.front {
+    border: 2px solid;
+    border-radius: 10px;
+    width: 270px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #f11505c9 0%, #ff0000 45%, #000000eb 46%, #000000ea 53%, #fff 54%);
+}
+
+.card_duel_img {
+    width: 15em;
+}
+
+#card_duel-image {
+    height: 100%;
+}
+
+.playing_cards {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.playing_card {
+    height: fit-content;
+    width: fit-content;
+    border-radius: 10px;
+}
+
+.inside-border {
+    width: 270px;
+    height: 400px;
+    margin: 5px;
+    border: 2px solid;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card-img {
+    
+    align-self: flex-start;
+    width: 250px;
+    height: 35%;
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.imgs {
+    width: 70%;
+}
+
+.card_name {
+    text-transform: uppercase;
+    text-align: center;
+    font-family: "Hanalei Fill";
+	background-image: -webkit-linear-gradient(180deg, #e880c7, #c7a97e);
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+    font-size: 1.8em;
+    text-shadow: 2px 2px 1px #00000045;
+    font-weight: 900;
+}
+
+.pokemon-weapon {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #d74417;
+    line-height: 15px;
+    background-color: rgba(240, 248, 255, 0.774);
+    border: 1px solid;
+    height: 70%;
+    padding: 1px 10px;
+    position: relative;
+    border-radius: 5px;
+    font-family: "Hanalei Fill";
+    text-transform: uppercase;
+    cursor: default;
+    box-shadow: 0 7px 14px rgba(0,0,0,0.2);
+}
+
+.pokemon-weapon:hover {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transform: translateY(-5%);
+}
+
+.pokemon-values {
+    position: absolute;
+    left: 75%;
+}
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.card-text {
+    width: 250px;
+    height: 50%;
+    margin-bottom: 5%;
+    margin: auto;
+    align-self: flex-end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+@media (max-width: 600px) and (min-width: 540px){
+    .help-box {
+        width: 50vw;
+    }
+    .logo {
+        width: 450px;
+        height: 450px;
+    }
+    #help-info {
+        font-size: 0.7em;
+    }
+    .inside-border {
+        width: 240px;
+        height: 380px;
+    }
+    .card-img {
+        width: 228px;
+        margin-top: 1.5%;
+    }
+    #help {
+        height: 40px;
+        width: 40px;
+    }
+    #YouWin {
+        height: 100%;
+        width: 100%;
+    }
+    
+    .card-text {
+        width: 228px;
+        margin-bottom: 1.5%;
+    }
+    .front {
+        width: 240px;
+        height: 380px;
+    }
+    #card_duel_img {
+        width: 8em;
+    }
+    #card1 {
+        animation: shiftLeft 1s forwards;
+    }
+    @keyframes shiftLeft {
+        to {
+            transform: translate(10%, -65%);
+        }
+    }
+    .card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-100%, -65%);
+        transform-style: preserve-3d;
+        perspective: 600px;
+        transition: 0.5s;
+    }   
+    #card2 {
+        animation: shiftRight 1s 1s forwards;
+        z-index: 10;
+    } 
+    @keyframes shiftRight {
+        to {
+            position: absolute;
+            transform: translate(-50%, -35%);
+        }
+    }
+    #card1:hover {
+        z-index: 100;
+    }
+    #card3:hover {
+        z-index: 100;
+    }
+    .card .back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #fff;
+        border-radius: 10px;
+        transform: rotateX(180deg);
+        transition: 0.5s;
+    }
+}
+
+@media (max-width: 540px) and (min-width: 370px){
+    .inside-border {
+        width: 210px;
+        height: 340px;
+    }
+    .play-buttons {
+        font-size: 1.2em;
+    }
+    #start-game {
+        background-image: none;
+        background-size: 100%;
+    }
+    .logo {
+        width: 380px;
+        height: 380px;
+    }
+    #help-info {
+        font-size: 1.5vh;
+    }
+    .help-box {
+        width: 50vw;
+    }
+
+    .card-img {
+        width: 200px;
+        margin-top: 2%;
+    }
+
+    #help {
+        height: 40px;
+        width: 40px;
+    }
+    #YouWin {
+        height: 50%;
+        width: 100%;
+    }
+
+    .card-text {
+        width: 200px;
+        margin-bottom: 2%;
+    }
+    .front {
+        width: 210px;
+        height: 340px;
+    }
+    #card_duel_img {
+        width: 5em;
+    }
+    .flip:nth-child(1):hover .back {
+        transform: rotateY(0deg);
+    }
+    .flip:hover .front {
+        transform: rotateY(-180deg);
+    }
+    .card .front {
+        backface-visibility: hidden;
+        transform: rotateY(0deg);
+        transition: 0.5s;
+    }
+    .card .back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        backface-visibility: hidden;
+        border-radius: 10px;
+        transform: rotateY(180deg);
+        transition: 0.5s;
+    }
+
+    @keyframes shiftLeft {
+        to {
+            position: absolute;
+            transform: translate(-50%, 50%);
+        }
+    }
+    
+    @keyframes shiftRight {
+        to {
+            position: absolute;
+            transform: translate(-50%, 170%);
+        }
+    }
+
+    @keyframes shiftLeft2 {
+        to {
+            position: absolute;
+            transform: translate(-50%, 290%);
+        }
+    }
+    
+    @keyframes shiftRight2 {
+        to {
+            position: absolute;
+            transform: translate(-50%, 400%);
+        }
+    }
+    
+    .pokemon-weapon {
+        font-size: 50%;
+        padding: 0.5px 10px;
+    }
+
+    .card_name {
+        font-size: 1em;
+    }
+}
+
+
+@media (max-width: 370px){
+    .inside-border {
+        width: 190px;
+        height: 280px;
+    }
+    #start-game {
+        background-image:none;
+        background-size: 100%;
+    }
+    #how-play {
+        background-image:none;
+        background-size: 110%;
+    }
+    .play-buttons {
+        font-size: 1em;
+    }
+    #help-info {
+        font-size: 0.3em;
+    }
+    .logo {
+        width: 300px;
+        height: 300px;
+    }
+    .help-box {
+        width: 50vw;
+    }
+    
+    .card-img {
+        width: 178px;
+        margin-top: 2%;
+    }
+    .card-text {
+        width: 178px;
+        margin-bottom: 2%;
+    }
+    .front {
+        width: 190px;
+        height: 280px;
+    }
+    #YouLose {
+        width: 100vw;
+        object-fit: contain;
+        height: 100%;
+    }
+    #card_duel_img {
+        width: 5em;
+    }
+    .flip:nth-child(1):hover .back {
+        transform: rotateY(0deg);
+    }
+    #YouWin {
+        height: 30vh;
+    }
+    .flip:hover .front {
+        transform: rotateY(-180deg);
+    }
+    .card .front {
+        backface-visibility: hidden;
+        transform: rotateY(0deg);
+        transition: 0.5s;
+    }
+    .card .back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        backface-visibility: hidden;
+        border-radius: 10px;
+        transform: rotateY(180deg);
+        transition: 0.5s;
+    }
+
+    @keyframes shiftLeft {
+        to {
+            position: absolute;
+            transform: translate(-50%, 50%);
+        }
+    }
+    
+    @keyframes shiftRight {
+        to {
+            position: absolute;
+            transform: translate(-50%, 170%);
+        }
+    }
+
+    @keyframes shiftLeft2 {
+        to {
+            position: absolute;
+            transform: translate(-50%, 290%);
+        }
+    }
+    
+    @keyframes shiftRight2 {
+        to {
+            position: absolute;
+            transform: translate(-50%, 400%);
+        }
+    }
+    
+    .pokemon-weapon {
+        font-size: 50%;
+        padding: 0.5px 10px;
+    }
+
+    .card_name {
+        font-size: 1em;
+    }
+    #help {
+        height: 40px;
+        width: 40px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div id="logo-game">
+        <img src="https://i.ibb.co/kQGCNBz/Card-Duel-img.png" alt="" class="logo">
+    </div>
+    <div class="game-start">
+        <button id="start-game" class="play-buttons"><p id="duel">LET'S DUEL</p></button>
+        <button id="how-play" class="play-buttons">HELP</button>
+    </div>
+    <div id="help-whole">
+        <div class="flipping">
+            <div class="help-box frontier">
+            <div>
+                <div class="help-img"><img src="https://i.ibb.co/YjVBXx7/pikachu.png"  alt="" id="help-image"></div>
+                
+            </div>
+            <div class="help-content">
+                <header id="h-header">HELP</header>
+                        <ul id="help-info">
+                            <li>Pick any of your 3 Pokemon Cards to face off against the Computer</li>
+                            <li>Choose any of the skills of any one of your Pokemon to face off against the skills of one of the Computer's Pokemon</li>
+                            <li>If you win, you get the Pokemon card and vice versa</li>
+                            <li>The game continues until either you have gained all the Computer's cards or you have lost all your cards</li>
+                            <li>OH! And once you have used a skill of your Pokemon to win, that skill dissappears.</li>
+                            <li>Most suitable for desktop computers or laptops but still playable on mobile phones.</li>
+                            <li>GOOD LUCK!</li>
+                        </ul>
+            </div>
+            <div class="backer"></div>
+        </div>
+        </div>
+    </div>
+    <button id="help"></button>
+    <img id="bg-image" src="https://i.ibb.co/Nj1TxtT/pokeball.jpg" >
+    <div id="YouJustWon">
+        <img src="https://i.ibb.co/P1rmQbr/You-Win.png" alt="You Win" id="YouWin" class="winlose">
+        <button class="goHome" id="winHome"></button>
+    </div>
+    <div id="YouJustLost">
+        <img src="https://i.ibb.co/sVN2JRf/You-Lose.png" alt="You Lose" id="YouLose" class="winlose">
+        <button class="goHome" id="loseHome"></button>
+    </div>
+    <div id="collection_of_cards" class="clearUp">
+        <div class="playing_cards">
+            <div class="playing_card card flip" id="card1">
+                <div class="inside-border back">
+                    <section class="card-img"><img src="none" alt="Loading.." class="imgs" id="imgs1"></section>
+                    <section class="card_name" id="card_name1">pokemon</section>
+                    <div class="card-text">
+                        <div class="grid-layout">
+                            <p id="pokemon-attack" class="pokemon-weapon" value="" onclick="isClicked(this);" >Attack <span  id="pokemon-attack-value1" class="pokemon-values"></span></p>
+                            <p id="pokemon-defense" class="pokemon-weapon" value=""  onclick="isClicked(this);" >Defense <span id="pokemon-defense-value1" class="pokemon-values"  ></span></p>
+                            <p id="pokemon-speed" class="pokemon-weapon" value=""  onclick="isClicked(this);" >Speed <span id="pokemon-speed-value1" class="pokemon-values"  ></span></p>
+                            <p id="pokemon-hp" class="pokemon-weapon" value=""  onclick="isClicked(this);" >HP <span id="pokemon-hp-value1"  class="pokemon-values" ></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="front">
+                    <div class="details"><img src="https://i.ibb.co/kQGCNBz/Card-Duel-img.png" class="card_duel_img"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="playing_cards">
+            <div class="playing_card card flip" id="card2">
+                <div class="inside-border back">
+                    <section class="card-img"><img src="none" alt="Loading.." class="imgs" id="imgs2"></section>
+                    <section class="card_name" id="card_name2">pokemon</section>
+                    <div class="card-text">
+                        <div class="grid-layout">
+                            <p id="pokemon-attack2" class="pokemon-weapon" value="" onclick="isClicked(this);" >Attack <span id="pokemon-attack-value2" class="pokemon-values"  ></span></p>
+                            <p id="pokemon-defense2" class="pokemon-weapon" value="" onclick="isClicked(this);" >Defense <span id="pokemon-defense-value2"  class="pokemon-values"></span></p>
+                            <p id="pokemon-speed2" class="pokemon-weapon" value="" onclick="isClicked(this);" >Speed <span id="pokemon-speed-value2"  class="pokemon-values" ></span></p>
+                            <p id="pokemon-hp2" class="pokemon-weapon" value="" value3="card2"  onclick="isClicked(this);" >HP <span id="pokemon-hp-value2" class="pokemon-values" ></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="front">
+                    <div class="details"><img src="https://i.ibb.co/kQGCNBz/Card-Duel-img.png" class="card_duel_img"></div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="playing_cards">
+            <div class="playing_card card flip" id="card3">
+                <div class="inside-border back">
+                    <section class="card-img"><img src="none" alt="Loading.." class="imgs" id="imgs3"></section>
+                    <section class="card_name" id="card_name3">pokemon</section>
+                    <div class="card-text">
+                        <div class="grid-layout">
+                            <p id="pokemon-attack3" class="pokemon-weapon" value="" onclick="isClicked(this);" >Attack <span id="pokemon-attack-value3"  class="pokemon-values" ></span></p>
+                            <p id="pokemon-defense3" class="pokemon-weapon" value="" onclick="isClicked(this);" >Defense <span id="pokemon-defense-value3"  class="pokemon-values" ></span></p>
+                            <p id="pokemon-speed3" class="pokemon-weapon" value="" onclick="isClicked(this);" >Speed <span id="pokemon-speed-value3" class="pokemon-values" ></span></p>
+                            <p id="pokemon-hp3" class="pokemon-weapon" value="" onclick="isClicked(this);" >HP <span id="pokemon-hp-value3"  class="pokemon-values" ></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="front">
+                    <div class="details"><img src="https://i.ibb.co/kQGCNBz/Card-Duel-img.png" class="card_duel_img"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="playing_cards">
+            <div class="playing_card card flip" id="card4">
+                <div class="inside-border back">
+                    <section class="card-img"><img src="none" alt="Loading.." class="imgs" id="imgs4"></section>
+                    <section class="card_name" id="card_name4">pokemon</section>
+                    <div class="card-text">
+                        <div class="grid-layout">
+                            <p id="pokemon-attack4" class="pokemon-weapon" value="" onclick="isClicked(this);" >Attack <span id="pokemon-attack-value4"  class="pokemon-values" ></span></p>
+                            <p id="pokemon-defense4" class="pokemon-weapon" value=""  onclick="isClicked(this);" >Defense <span id="pokemon-defense-value4"  class="pokemon-values" ></span></p>
+                            <p id="pokemon-speed4" class="pokemon-weapon" value="" onclick="isClicked(this);" >Speed <span id="pokemon-speed-value4" class="pokemon-values" ></span></p>
+                            <p id="pokemon-hp4" class="pokemon-weapon" value=""  onclick="isClicked(this);" >HP <span id="pokemon-hp-value4"  class="pokemon-values" ></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="front">
+                    <div class="details"><img src="https://i.ibb.co/kQGCNBz/Card-Duel-img.png" class="card_duel_img"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="playing_cards">
+            <div class="playing_card card flip" id="card5">
+                <div class="inside-border back">
+                    <section class="card-img"><img src="none" alt="Loading.." class="imgs" id="imgs5"></section>
+                    <section class="card_name" id="card_name5">pokemon</section>
+                    <div class="card-text">
+                        <div class="grid-layout">
+                            <p id="pokemon-attack5" class="pokemon-weapon" value=""  onclick="isClicked(this);" >Attack <span id="pokemon-attack-value5"  class="pokemon-values" ></span></p>
+                            <p id="pokemon-defense5" class="pokemon-weapon" value=""  onclick="isClicked(this);" >Defense <span id="pokemon-defense-value5"  class="pokemon-values" ></span></p>
+                            <p id="pokemon-speed5" class="pokemon-weapon" value="" onclick="isClicked(this);" >Speed <span id="pokemon-speed-value5" class="pokemon-values" ></span></p>
+                            <p id="pokemon-hp5" class="pokemon-weapon" value=""  onclick="isClicked(this);" >HP <span id="pokemon-hp-value5"  class="pokemon-values" ></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="front">
+                    <div class="details"><img src="https://i.ibb.co/kQGCNBz/Card-Duel-img.png"  class="card_duel_img"></div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-layout-last" style="display: none;">
+            <p id="pokemon-attack6" value="" value3="card6" >Attack <span id="pokemon-attack-value5"></span></p>
+            <p id="pokemon-defense6" value="" value3="card6" >Defense <span id="pokemon-defense-value6"></span></p>
+            <p id="pokemon-speed6" value="" value3="card6" >Speed <span id="pokemon-speed-value6"></span></p>
+            <p id="pokemon-hp6" value="" value3="card6" >HP <span id="pokemon-hp-value6" ></span></p>
+        </div>
+    </div> 
+    <script>
+        // Initialization
+    let card_images1 = document.getElementById('imgs1');
+      let card_images2 = document.getElementById('imgs2');
+      let card_images3 = document.getElementById('imgs3');
+      let card_images4 = document.getElementById('imgs4');
+      let card_images5 = document.getElementById('imgs5');
+      let card_names1 = document.getElementById('card_name1');
+      let card_names2 = document.getElementById('card_name2');
+      let card_names3 = document.getElementById('card_name3');
+      let card_names4 = document.getElementById('card_name4');
+      let card_names5 = document.getElementById('card_name5');
+      let help = document.getElementById("help");
+      let helpImage = document.getElementById('how-play');
+      let isBlur = false;
+      let carddis = false;
+      let lastToWin = false;
+      var weapons = document.getElementsByClassName("pokemon-weapon");
+      var cards = document.getElementsByClassName("playing_card");
+      let attackStat = "N/A";
+      let hpStat = "N/A";
+      let defenseStat = "N/A";
+      let speedStat = "N/A";
+      let specialAttackStat = "N/A";
+      let arraySkills = ['attack', 'defense', 'speed', 'hp']
+      let userChoice;
+      let pictureArray = ['https://i.ibb.co/YjVBXx7/pikachu.png', 'https://i.ibb.co/bb6zDgR/charmander.png', 'https://i.ibb.co/0Z8M7mJ/squirtle.png'];
+      let backgroundImage = document.getElementById('help-image');
+      let randomId;
+      let currentId = 0;
+      let buttonValue;
+      let buttonValue2;
+      let ogbutton2;
+      let id_elemental;
+      let enemyValue;
+      let opacity = 1;
+      let countDown = 0;
+      let winHome = document.getElementById('winHome');
+      let loseHome = document.getElementById('loseHome');
+      let helpWhole = document.getElementById('help-whole');
+      let isClickedBefore = false;
+      let deckOfCards = ['card1', 'card2', 'card3']
+      let startGame = document.getElementById('start-game');
+      
+      // Card Game creation and rendering
+      let id = Math.floor(Math.random() * 1024 + 1);
+      fetch(`https://pokedex.mimo.dev/api/pokemon/${id}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          let imageUrl = `https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/${id}.png`;
+          card_images1.src = imageUrl;
+          card_names1.innerText = pokemon.name;
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+          document.getElementById("pokemon-attack-value1").innerText = attackStat;
+          document.getElementById("pokemon-attack").value =  attackStat;
+          document.getElementById("pokemon-attack").value2 =  "Attack";
+          document.getElementById("pokemon-attack").value3 =  "card1";
+          document.getElementById("pokemon-defense-value1").innerText = defenseStat;
+          document.getElementById("pokemon-defense").value =  defenseStat;
+          document.getElementById("pokemon-defense").value2 =  "Defense";
+          document.getElementById("pokemon-defense").value3 =  "card1";
+          document.getElementById("pokemon-speed-value1").innerText = speedStat;
+          document.getElementById("pokemon-speed").value =  speedStat;
+          document.getElementById("pokemon-speed").value2 =  "Speed";
+          document.getElementById("pokemon-speed").value3 =  "card1";
+          document.getElementById("pokemon-hp-value1").innerText = hpStat;
+          document.getElementById("pokemon-hp").value =  hpStat;
+          document.getElementById("pokemon-hp").value2 =  "HP";
+          document.getElementById("pokemon-hp").value3 =  "card1";
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+      //////////
+      
+        let id2 = Math.floor(Math.random() * 1024 + 1);
+        fetch(`https://pokedex.mimo.dev/api/pokemon/${id2}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          let imageUrl2 = `https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/${id2}.png`;
+              card_images2.src = imageUrl2;
+              card_names2.innerText = pokemon.name;
+          
+          
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+      
+          document.getElementById("pokemon-attack-value2").innerText = attackStat;
+          document.getElementById("pokemon-attack2").value =  attackStat;
+          document.getElementById("pokemon-attack2").value2 = 'Attack';
+          document.getElementById("pokemon-attack2").value3 = 'card2';
+          document.getElementById("pokemon-defense-value2").innerText = defenseStat;
+          document.getElementById("pokemon-defense2").value =  defenseStat;
+          document.getElementById("pokemon-defense2").value2 =  'Defense';
+          document.getElementById("pokemon-defense2").value3 =  'card2';
+          document.getElementById("pokemon-speed-value2").innerText = speedStat;
+          document.getElementById("pokemon-speed2").value =  speedStat;
+          document.getElementById("pokemon-speed2").value2 = 'Speed';
+          document.getElementById("pokemon-speed2").value3 = 'card2';
+          document.getElementById("pokemon-hp-value2").innerText = hpStat;
+          document.getElementById("pokemon-hp2").value =  hpStat;
+          document.getElementById("pokemon-hp2").value2 = 'HP'
+          document.getElementById("pokemon-hp2").value3 = 'card2'
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+      
+        //////////
+      
+        let id3 = Math.floor(Math.random() * 1024 + 1);
+        fetch(`https://pokedex.mimo.dev/api/pokemon/${id3}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          let imageUrl3 = `https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/${id3}.png`;
+              card_images3.src = imageUrl3;
+              card_names3.innerText = pokemon.name;
+          
+          
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+      
+          document.getElementById("pokemon-attack-value3").innerText = attackStat;
+          document.getElementById("pokemon-attack3").value =  attackStat;
+          document.getElementById("pokemon-attack3").value2 = 'Attack';
+          document.getElementById("pokemon-attack3").value3 = 'card3';
+          document.getElementById("pokemon-defense-value3").innerText = defenseStat;
+          document.getElementById("pokemon-defense3").value =  defenseStat;
+          document.getElementById("pokemon-defense3").value2 = 'Defense';
+          document.getElementById("pokemon-defense3").value3 = 'card3';
+          document.getElementById("pokemon-speed-value3").innerText = speedStat;
+          document.getElementById("pokemon-speed3").value =  speedStat;
+          document.getElementById("pokemon-speed3").value2 = 'Speed';
+          document.getElementById("pokemon-speed3").value3 = 'card3';
+          document.getElementById("pokemon-hp-value3").innerText = hpStat;
+          document.getElementById("pokemon-hp3").value =  hpStat;
+          document.getElementById("pokemon-hp3").value2 =  'HP';
+          document.getElementById("pokemon-hp3").value3 =  'card3';
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+        let id4 = Math.floor(Math.random() * 1024 + 1);
+        fetch(`https://pokedex.mimo.dev/api/pokemon/${id4}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          let imageUrl4 = `https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/${id4}.png`;
+              card_images4.src = imageUrl4;
+              card_names4.innerText = pokemon.name;
+          
+          
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+      
+          document.getElementById("pokemon-attack-value4").innerText = attackStat;
+          document.getElementById("pokemon-attack4").value =  attackStat;
+          document.getElementById("pokemon-attack4").value2 = 'Attack';
+          document.getElementById("pokemon-attack4").value3 = 'card4';
+          document.getElementById("pokemon-defense-value4").innerText = defenseStat;
+          document.getElementById("pokemon-defense4").value =  defenseStat;
+          document.getElementById("pokemon-defense4").value2 = 'Defense';
+          document.getElementById("pokemon-defense4").value3 = 'card4';
+          document.getElementById("pokemon-speed-value4").innerText = speedStat;
+          document.getElementById("pokemon-speed4").value =  speedStat;
+          document.getElementById("pokemon-speed4").value2 = 'Speed';
+          document.getElementById("pokemon-speed4").value3 = 'card4';
+          document.getElementById("pokemon-hp-value4").innerText = hpStat;
+          document.getElementById("pokemon-hp4").value =  hpStat;
+          document.getElementById("pokemon-hp4").value2 = 'HP';
+          document.getElementById("pokemon-hp4").value3 = 'card4';
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+        let id5 = Math.floor(Math.random() * 1024 + 1);
+        fetch(`https://pokedex.mimo.dev/api/pokemon/${id5}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          let imageUrl5 = `https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/${id5}.png`;
+              card_images5.src = imageUrl5;
+              card_names5.innerText = pokemon.name;
+          
+          
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+      
+          document.getElementById("pokemon-attack-value5").innerText = attackStat;
+          document.getElementById("pokemon-attack5").value =  attackStat;
+          document.getElementById("pokemon-attack5").value2 = 'Attack';
+          document.getElementById("pokemon-defense-value5").innerText = defenseStat;
+          document.getElementById("pokemon-defense5").value =  defenseStat;
+          document.getElementById("pokemon-defense5").value2 = 'Defense';
+          document.getElementById("pokemon-speed-value5").innerText = speedStat;
+          document.getElementById("pokemon-speed5").value =  speedStat;
+          document.getElementById("pokemon-speed5").value2 = 'Speed';
+          document.getElementById("pokemon-hp-value5").innerText = hpStat;
+          document.getElementById("pokemon-hp5").value =  hpStat;
+          document.getElementById("pokemon-hp5").value2 = 'HP';
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+        let id6 = Math.floor(Math.random() * 1024 + 1);
+        fetch(`https://pokedex.mimo.dev/api/pokemon/${id6}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+      
+          document.getElementById("pokemon-attack6").value =  attackStat;
+          document.getElementById("pokemon-defense6").value =  defenseStat;
+          document.getElementById("pokemon-speed6").value =  speedStat;
+          document.getElementById("pokemon-hp6").value =  hpStat;
+          document.getElementById("pokemon-attack6").value2 =  'Attack';
+          document.getElementById("pokemon-defense6").value2 = 'Defense';
+          document.getElementById("pokemon-speed6").value2 = 'Speed';
+          document.getElementById("pokemon-hp6").value2 =  'HP';
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+        // Card Deletion 
+      function deleteCard1() {
+        countDown  ++
+        opacity = 1;
+        let interval = setInterval(() => {
+          opacity -= 0.015;
+          document.getElementById('card1').style.opacity = opacity.toString();
+          if (opacity <= 0) {
+            clearInterval(interval);
+            document.getElementById('card1').style.display = 'none';
+          }
+        }, 5)
+      }
+      
+      function deleteCard2() {
+        opacity = 1;
+        countDown  ++
+        let interval = setInterval(() => {
+          opacity -= 0.015;
+          document.getElementById('card2').style.opacity = opacity.toString();
+          if (opacity <= 0) {
+            clearInterval(interval);
+            document.getElementById('card2').style.display = 'none';
+          }
+        }, 5)
+      }
+      
+      function deleteCard3() {
+        opacity = 1;
+        countDown  ++
+        let interval = setInterval(() => {
+          opacity -= 0.015;
+          document.getElementById('card3').style.opacity = opacity.toString();
+          if (opacity <= 0) {
+            clearInterval(interval);
+            document.getElementById('card3').style.display = 'none';
+          }
+        }, 5)
+      }
+      
+      function deleteCard4() {
+        opacity = 1;
+        countDown  ++
+        let interval = setInterval(() => {
+          opacity -= 0.015;
+          document.getElementById('card4').style.opacity = opacity.toString();
+          if (opacity <= 0) {
+            clearInterval(interval);
+            document.getElementById('card4').style.display = 'none';
+          }
+        }, 5)
+      }
+      
+      function deleteCard5() {
+        opacity = 1;
+        countDown  ++
+        let interval = setInterval(() => {
+          opacity -= 0.015;
+          document.getElementById('card5').style.opacity = opacity.toString();
+          if (opacity <= 0) {
+            clearInterval(interval);
+            document.getElementById('card5').style.display = 'none';
+          }
+        }, 5)
+      }
+      
+        function isClicked(button) {
+          buttonValue = button.value;
+          buttonValue2 = button.value2;
+          id_element = button.value3;
+          ogbutton2 = buttonValue2.toLowerCase();
+          if (!carddis) {
+            fetch(`https://pokedex.mimo.dev/api/pokemon/${id4}`)
+            .then((response) => response.json())
+            .then((pokemon) => {
+              for (let stat of pokemon.stats) {
+                if (stat.stat.name === ogbutton2) {
+                  enemyValue = stat.base_stat;
+                    if (buttonValue > enemyValue) {
+                      console.log('You win this round')
+                      carddis = !carddis;
+                      deckOfCards.push('card4');
+                      document.getElementById(button.id).style.display = "none";
+                      document.getElementById('card4').style.display = 'block';
+                    }
+                    else if (buttonValue == enemyValue) {
+                      console.log('DRAW')
+                    }
+                    else {
+                      console.log('You lost');
+                      console.log(id_element);
+                      if (deckOfCards.length <= 1) {
+                        document.getElementById('collection_of_cards').style.display = 'none';
+                        help.style.display = 'none';
+                        document.getElementById('YouJustLost').style.display = 'block';
+                      }
+                      if (id_element == 'card1') {
+                        console.log('card1');
+                        countDown  ++; console.log(deckOfCards.length)
+                        deleteCard1();
+                        deckOfCards.splice(0, 1);
+                      }
+                      else if (id_element == 'card2') {
+                        deleteCard2();
+                        countDown  ++; console.log(deckOfCards.length)
+                        console.log('card2');
+                        deckOfCards.splice(0, 1);
+                      }
+                      else if (id_element == 'card3') {
+                        deleteCard3();
+                        countDown  ++; console.log(deckOfCards.length)
+                        console.log('card3');
+                        deckOfCards.splice(0, 1);
+                      }
+                      else if (id_element == 'card4') {
+                        deleteCard4();
+                        countDown  ++; console.log(deckOfCards.length)
+                        console.log('card4');
+                        deckOfCards.splice(0, 1);
+                      }
+                      else {
+                        deleteCard5();
+                        countDown  ++; console.log(deckOfCards.length)
+                        deckOfCards.splice(0, 1);
+                      }
+                    }
+                }
+              }
+            })
+            .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+          }
+          else {
+            fetch(`https://pokedex.mimo.dev/api/pokemon/${id5}`)
+            .then((response) => response.json())
+            .then((pokemon) => {
+              for (let stat of pokemon.stats) {
+                if (stat.stat.name === ogbutton2) {
+                  enemyValue = stat.base_stat;
+                  if (buttonValue > enemyValue) {
+                    console.log('You win this round')
+                    document.getElementById('card5').style.display = 'block'; 
+                    lastToWin = !lastToWin;
+                    deckOfCards.push('card5');
+                    document.getElementById(button.id).style.display = "none";
+                  }
+                  else if (buttonValue == enemyValue) {
+                    console.log('DRAW')
+                  }
+                  else {
+                    console.log('You lost');
+                    console.log(id_element);
+                    if (deckOfCards.length <= 1) {
+                      document.getElementById('collection_of_cards').style.display = 'none';
+                      document.getElementById('YouJustLost').style.display = 'block';
+                      help.style.display = 'none';
+                    }
+                    if (id_element == 'card1') {
+                      console.log('card1');
+                      countDown  ++; console.log(deckOfCards.length)
+                      deleteCard1();
+                      deckOfCards.splice(0, 1);
+                    }
+                    else if (id_element == 'card2') {
+                      deleteCard2();
+                      countDown  ++; console.log(deckOfCards.length)
+                      console.log('card2');
+                      deckOfCards.splice(0, 1);
+                    }
+                    else if (id_element == 'card3') {
+                      deleteCard3();
+                      countDown  ++; console.log(deckOfCards.length)
+                      console.log('card3');
+                      deckOfCards.splice(0, 1);
+                    }
+                    else if (id_element == 'card4') {
+                      deleteCard4();
+                      countDown  ++; console.log(deckOfCards.length)
+                      console.log('card4');
+                      deckOfCards.splice(0, 1);
+                    }
+                    else {
+                      deleteCard5();
+                      countDown  ++; console.log(deckOfCards.length)
+                      deckOfCards.splice(0, 1);
+                    }
+                  }
+                }
+              }
+            })
+            .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+          }
+          if (lastToWin) {
+            fetch(`https://pokedex.mimo.dev/api/pokemon/${id6}`)
+            .then((response) => response.json())
+            .then((pokemon) => {
+              for (let stat of pokemon.stats) {
+                if (stat.stat.name === ogbutton2) {
+                  enemyValue = stat.base_stat;
+                    if (buttonValue > enemyValue) {
+                      console.log('You WIN')
+                      document.getElementById('collection_of_cards').style.display = 'none';
+                      help.style.display = 'none';
+                      document.getElementById('YouJustWon').style.display = 'block';
+                    }
+                    else if (buttonValue == enemyValue) {
+                      console.log('DRAW')
+                    }
+                    else {
+                      console.log('You lost');
+                      console.log(id_element);
+                      if (deckOfCards.length <= 1) {
+                        document.getElementById('collection_of_cards').style.display = 'none';
+                        document.getElementById('YouJustLost').style.display = 'block';
+                        help.style.display = 'none';
+                      }
+                      if (id_element == 'card1') {
+                        console.log('card1');
+                        deleteCard1();
+                        deckOfCards.splice(0, 1);
+                        countDown  ++; console.log(deckOfCards.length)
+                      }
+                      else if (id_element == 'card2') {
+                        deleteCard2();
+                        console.log('card2');
+                        deckOfCards.splice(0, 1);
+                        countDown  ++; console.log(deckOfCards.length)
+                      }
+                      else if (id_element == 'card3') {
+                        deleteCard3();
+                        countDown  ++; console.log(deckOfCards.length)
+                        console.log('card3');
+                        deckOfCards.splice(0, 1);
+                      }
+                      else if (id_element == 'card4') {
+                        deleteCard4();
+                        countDown  ++; console.log(deckOfCards.length)
+                        console.log('card4');
+                        deckOfCards.splice(0, 1);
+                      }
+                      else {
+                        deleteCard5();
+                        deckOfCards.splice(0, 1);
+                        countDown  ++; console.log(deckOfCards.length)
+                      }
+                    }
+                }
+              }
+            })
+            .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+          }
+          
+        }
+      
+      startGame.addEventListener('click', function() {
+          document.querySelector('.game-start').style.display = 'none';
+          document.getElementById('collection_of_cards').style.display = 'flex';
+          help.style.display = 'block';
+          document.getElementById('card1').style.display = 'block';
+          document.getElementById('card2').style.display = 'block';
+          document.getElementById('card3').style.display = 'block'; 
+          carddis = false;
+          lastToWin = false;
+          document.getElementById('card1').style.opacity = 1;
+          document.getElementById('card2').style.opacity = 1;
+          document.getElementById('card3').style.opacity = 1;
+          document.getElementById('card4').style.opacity = 1;
+          document.getElementById('card5').style.opacity = 1;
+      })
+      
+      help.addEventListener('click', function() {
+        if (!isBlur) {
+          deckOfCards.forEach(card => {
+            document.getElementById(card).style.filter = 'blur(8px)';
+          })
+          document.getElementById('help-whole').style.display = 'flex';
+          isBlur = !isBlur;
+        }
+        else {
+          deckOfCards.forEach(card => {
+            document.getElementById(card).style.filter = 'blur(0)';
+          })
+          document.getElementById('help-whole').style.display = 'none';
+          isBlur = !isBlur;
+        }
+      })
+      
+      
+      winHome.addEventListener('click', function() {
+        document.querySelector('.game-start').style.display = 'flex';
+        document.getElementById('collection_of_cards').style.display = 'none';
+        help.style.display = 'none';
+        document.getElementById('YouJustWon').style.display = 'none';
+        document.querySelector('.game-start').style.animation = 'appearUp2 2s ease-in forwards';
+        deckOfCards.splice(3, 2);
+        document.getElementById('card4').style.display = 'none';
+        document.getElementById('card5').style.display = 'none';
+        let id = Math.floor(Math.random() * 1024 + 1);
+      fetch(`https://pokedex.mimo.dev/api/pokemon/${id}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          let imageUrl = `https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/${id}.png`;
+          card_images1.src = imageUrl;
+          card_names1.innerText = pokemon.name;
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+          document.getElementById("pokemon-attack-value1").innerText = attackStat;
+          document.getElementById("pokemon-attack").value =  attackStat;
+          document.getElementById("pokemon-attack").value2 =  "Attack";
+          document.getElementById("pokemon-attack").value3 =  "card1";
+          document.getElementById("pokemon-defense-value1").innerText = defenseStat;
+          document.getElementById("pokemon-defense").value =  defenseStat;
+          document.getElementById("pokemon-defense").value2 =  "Defense";
+          document.getElementById("pokemon-defense").value3 =  "card1";
+          document.getElementById("pokemon-speed-value1").innerText = speedStat;
+          document.getElementById("pokemon-speed").value =  speedStat;
+          document.getElementById("pokemon-speed").value2 =  "Speed";
+          document.getElementById("pokemon-speed").value3 =  "card1";
+          document.getElementById("pokemon-hp-value1").innerText = hpStat;
+          document.getElementById("pokemon-hp").value =  hpStat;
+          document.getElementById("pokemon-hp").value2 =  "HP";
+          document.getElementById("pokemon-hp").value3 =  "card1";
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+      //////////
+      
+        let id2 = Math.floor(Math.random() * 1024 + 1);
+        fetch(`https://pokedex.mimo.dev/api/pokemon/${id2}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          let imageUrl2 = `https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/${id2}.png`;
+              card_images2.src = imageUrl2;
+              card_names2.innerText = pokemon.name;
+          
+          
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+      
+          document.getElementById("pokemon-attack-value2").innerText = attackStat;
+          document.getElementById("pokemon-attack2").value =  attackStat;
+          document.getElementById("pokemon-attack2").value2 = 'Attack';
+          document.getElementById("pokemon-attack2").value3 = 'card2';
+          document.getElementById("pokemon-defense-value2").innerText = defenseStat;
+          document.getElementById("pokemon-defense2").value =  defenseStat;
+          document.getElementById("pokemon-defense2").value2 =  'Defense';
+          document.getElementById("pokemon-defense2").value3 =  'card2';
+          document.getElementById("pokemon-speed-value2").innerText = speedStat;
+          document.getElementById("pokemon-speed2").value =  speedStat;
+          document.getElementById("pokemon-speed2").value2 = 'Speed';
+          document.getElementById("pokemon-speed2").value3 = 'card2';
+          document.getElementById("pokemon-hp-value2").innerText = hpStat;
+          document.getElementById("pokemon-hp2").value =  hpStat;
+          document.getElementById("pokemon-hp2").value2 = 'HP'
+          document.getElementById("pokemon-hp2").value3 = 'card2'
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+      
+        //////////
+      
+        let id3 = Math.floor(Math.random() * 1024 + 1);
+        fetch(`https://pokedex.mimo.dev/api/pokemon/${id3}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          let imageUrl3 = `https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/${id3}.png`;
+              card_images3.src = imageUrl3;
+              card_names3.innerText = pokemon.name;
+          
+          
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+      
+          document.getElementById("pokemon-attack-value3").innerText = attackStat;
+          document.getElementById("pokemon-attack3").value =  attackStat;
+          document.getElementById("pokemon-attack3").value2 = 'Attack';
+          document.getElementById("pokemon-attack3").value3 = 'card3';
+          document.getElementById("pokemon-defense-value3").innerText = defenseStat;
+          document.getElementById("pokemon-defense3").value =  defenseStat;
+          document.getElementById("pokemon-defense3").value2 = 'Defense';
+          document.getElementById("pokemon-defense3").value3 = 'card3';
+          document.getElementById("pokemon-speed-value3").innerText = speedStat;
+          document.getElementById("pokemon-speed3").value =  speedStat;
+          document.getElementById("pokemon-speed3").value2 = 'Speed';
+          document.getElementById("pokemon-speed3").value3 = 'card3';
+          document.getElementById("pokemon-hp-value3").innerText = hpStat;
+          document.getElementById("pokemon-hp3").value =  hpStat;
+          document.getElementById("pokemon-hp3").value2 =  'HP';
+          document.getElementById("pokemon-hp3").value3 =  'card3';
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+        let id4 = Math.floor(Math.random() * 1024 + 1);
+        fetch(`https://pokedex.mimo.dev/api/pokemon/${id4}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          let imageUrl4 = `https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/${id4}.png`;
+              card_images4.src = imageUrl4;
+              card_names4.innerText = pokemon.name;
+          
+          
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+      
+          document.getElementById("pokemon-attack-value4").innerText = attackStat;
+          document.getElementById("pokemon-attack4").value =  attackStat;
+          document.getElementById("pokemon-attack4").value2 = 'Attack';
+          document.getElementById("pokemon-attack4").value3 = 'card4';
+          document.getElementById("pokemon-defense-value4").innerText = defenseStat;
+          document.getElementById("pokemon-defense4").value =  defenseStat;
+          document.getElementById("pokemon-defense4").value2 = 'Defense';
+          document.getElementById("pokemon-defense4").value3 = 'card4';
+          document.getElementById("pokemon-speed-value4").innerText = speedStat;
+          document.getElementById("pokemon-speed4").value =  speedStat;
+          document.getElementById("pokemon-speed4").value2 = 'Speed';
+          document.getElementById("pokemon-speed4").value3 = 'card4';
+          document.getElementById("pokemon-hp-value4").innerText = hpStat;
+          document.getElementById("pokemon-hp4").value =  hpStat;
+          document.getElementById("pokemon-hp4").value2 = 'HP';
+          document.getElementById("pokemon-hp4").value3 = 'card4';
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+        let id5 = Math.floor(Math.random() * 1024 + 1);
+        fetch(`https://pokedex.mimo.dev/api/pokemon/${id5}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          let imageUrl5 = `https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/${id5}.png`;
+              card_images5.src = imageUrl5;
+              card_names5.innerText = pokemon.name;
+          
+          
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+      
+          document.getElementById("pokemon-attack-value5").innerText = attackStat;
+          document.getElementById("pokemon-attack5").value =  attackStat;
+          document.getElementById("pokemon-attack5").value2 = 'Attack';
+          document.getElementById("pokemon-defense-value5").innerText = defenseStat;
+          document.getElementById("pokemon-defense5").value =  defenseStat;
+          document.getElementById("pokemon-defense5").value2 = 'Defense';
+          document.getElementById("pokemon-speed-value5").innerText = speedStat;
+          document.getElementById("pokemon-speed5").value =  speedStat;
+          document.getElementById("pokemon-speed5").value2 = 'Speed';
+          document.getElementById("pokemon-hp-value5").innerText = hpStat;
+          document.getElementById("pokemon-hp5").value =  hpStat;
+          document.getElementById("pokemon-hp5").value2 = 'HP';
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+        let id6 = Math.floor(Math.random() * 1024 + 1);
+        fetch(`https://pokedex.mimo.dev/api/pokemon/${id6}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+      
+          document.getElementById("pokemon-attack6").value =  attackStat;
+          document.getElementById("pokemon-defense6").value =  defenseStat;
+          document.getElementById("pokemon-speed6").value =  speedStat;
+          document.getElementById("pokemon-hp6").value =  hpStat;
+          document.getElementById("pokemon-attack6").value2 =  'Attack';
+          document.getElementById("pokemon-defense6").value2 = 'Defense';
+          document.getElementById("pokemon-speed6").value2 = 'Speed';
+          document.getElementById("pokemon-hp6").value2 =  'HP';
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+        deckOfCards = ['card1', 'card2', 'card3']
+        for (var i = 0, len = weapons.length; i < len; i++) {
+          weapons[i].style.display = 'flex';
+        }
+      
+        document.getElementById('card1').style.display = 'block';
+          document.getElementById('card2').style.display = 'block';
+          document.getElementById('card3').style.display = 'block';
+      })
+      
+      loseHome.addEventListener('click', function() {
+        document.querySelector('.game-start').style.display = 'flex';
+        document.getElementById('collection_of_cards').style.display = 'none';
+        help.style.display = 'none';
+        document.getElementById('YouJustLost').style.display = 'none';
+        document.querySelector('.game-start').style.animation = 'appearUp2 2s ease-in forwards';
+        deckOfCards.splice(3, 2);
+        document.getElementById('card4').style.display = 'none';
+        document.getElementById('card5').style.display = 'none';
+        let id = Math.floor(Math.random() * 1024 + 1);
+      fetch(`https://pokedex.mimo.dev/api/pokemon/${id}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          let imageUrl = `https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/${id}.png`;
+          card_images1.src = imageUrl;
+          card_names1.innerText = pokemon.name;
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+          document.getElementById("pokemon-attack-value1").innerText = attackStat;
+          document.getElementById("pokemon-attack").value =  attackStat;
+          document.getElementById("pokemon-attack").value2 =  "Attack";
+          document.getElementById("pokemon-attack").value3 =  "card1";
+          document.getElementById("pokemon-defense-value1").innerText = defenseStat;
+          document.getElementById("pokemon-defense").value =  defenseStat;
+          document.getElementById("pokemon-defense").value2 =  "Defense";
+          document.getElementById("pokemon-defense").value3 =  "card1";
+          document.getElementById("pokemon-speed-value1").innerText = speedStat;
+          document.getElementById("pokemon-speed").value =  speedStat;
+          document.getElementById("pokemon-speed").value2 =  "Speed";
+          document.getElementById("pokemon-speed").value3 =  "card1";
+          document.getElementById("pokemon-hp-value1").innerText = hpStat;
+          document.getElementById("pokemon-hp").value =  hpStat;
+          document.getElementById("pokemon-hp").value2 =  "HP";
+          document.getElementById("pokemon-hp").value3 =  "card1";
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+      //////////
+      
+        let id2 = Math.floor(Math.random() * 1024 + 1);
+        fetch(`https://pokedex.mimo.dev/api/pokemon/${id2}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          let imageUrl2 = `https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/${id2}.png`;
+              card_images2.src = imageUrl2;
+              card_names2.innerText = pokemon.name;
+          
+          
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+      
+          document.getElementById("pokemon-attack-value2").innerText = attackStat;
+          document.getElementById("pokemon-attack2").value =  attackStat;
+          document.getElementById("pokemon-attack2").value2 = 'Attack';
+          document.getElementById("pokemon-attack2").value3 = 'card2';
+          document.getElementById("pokemon-defense-value2").innerText = defenseStat;
+          document.getElementById("pokemon-defense2").value =  defenseStat;
+          document.getElementById("pokemon-defense2").value2 =  'Defense';
+          document.getElementById("pokemon-defense2").value3 =  'card2';
+          document.getElementById("pokemon-speed-value2").innerText = speedStat;
+          document.getElementById("pokemon-speed2").value =  speedStat;
+          document.getElementById("pokemon-speed2").value2 = 'Speed';
+          document.getElementById("pokemon-speed2").value3 = 'card2';
+          document.getElementById("pokemon-hp-value2").innerText = hpStat;
+          document.getElementById("pokemon-hp2").value =  hpStat;
+          document.getElementById("pokemon-hp2").value2 = 'HP'
+          document.getElementById("pokemon-hp2").value3 = 'card2'
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+      
+        //////////
+      
+        let id3 = Math.floor(Math.random() * 1024 + 1);
+        fetch(`https://pokedex.mimo.dev/api/pokemon/${id3}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          let imageUrl3 = `https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/${id3}.png`;
+              card_images3.src = imageUrl3;
+              card_names3.innerText = pokemon.name;
+          
+          
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+      
+          document.getElementById("pokemon-attack-value3").innerText = attackStat;
+          document.getElementById("pokemon-attack3").value =  attackStat;
+          document.getElementById("pokemon-attack3").value2 = 'Attack';
+          document.getElementById("pokemon-attack3").value3 = 'card3';
+          document.getElementById("pokemon-defense-value3").innerText = defenseStat;
+          document.getElementById("pokemon-defense3").value =  defenseStat;
+          document.getElementById("pokemon-defense3").value2 = 'Defense';
+          document.getElementById("pokemon-defense3").value3 = 'card3';
+          document.getElementById("pokemon-speed-value3").innerText = speedStat;
+          document.getElementById("pokemon-speed3").value =  speedStat;
+          document.getElementById("pokemon-speed3").value2 = 'Speed';
+          document.getElementById("pokemon-speed3").value3 = 'card3';
+          document.getElementById("pokemon-hp-value3").innerText = hpStat;
+          document.getElementById("pokemon-hp3").value =  hpStat;
+          document.getElementById("pokemon-hp3").value2 =  'HP';
+          document.getElementById("pokemon-hp3").value3 =  'card3';
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+        let id4 = Math.floor(Math.random() * 1024 + 1);
+        fetch(`https://pokedex.mimo.dev/api/pokemon/${id4}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          let imageUrl4 = `https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/${id4}.png`;
+              card_images4.src = imageUrl4;
+              card_names4.innerText = pokemon.name;
+          
+          
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+      
+          document.getElementById("pokemon-attack-value4").innerText = attackStat;
+          document.getElementById("pokemon-attack4").value =  attackStat;
+          document.getElementById("pokemon-attack4").value2 = 'Attack';
+          document.getElementById("pokemon-attack4").value3 = 'card4';
+          document.getElementById("pokemon-defense-value4").innerText = defenseStat;
+          document.getElementById("pokemon-defense4").value =  defenseStat;
+          document.getElementById("pokemon-defense4").value2 = 'Defense';
+          document.getElementById("pokemon-defense4").value3 = 'card4';
+          document.getElementById("pokemon-speed-value4").innerText = speedStat;
+          document.getElementById("pokemon-speed4").value =  speedStat;
+          document.getElementById("pokemon-speed4").value2 = 'Speed';
+          document.getElementById("pokemon-speed4").value3 = 'card4';
+          document.getElementById("pokemon-hp-value4").innerText = hpStat;
+          document.getElementById("pokemon-hp4").value =  hpStat;
+          document.getElementById("pokemon-hp4").value2 = 'HP';
+          document.getElementById("pokemon-hp4").value3 = 'card4';
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+        let id5 = Math.floor(Math.random() * 1024 + 1);
+        fetch(`https://pokedex.mimo.dev/api/pokemon/${id5}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          let imageUrl5 = `https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/${id5}.png`;
+              card_images5.src = imageUrl5;
+              card_names5.innerText = pokemon.name;
+          
+          
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+      
+          document.getElementById("pokemon-attack-value5").innerText = attackStat;
+          document.getElementById("pokemon-attack5").value =  attackStat;
+          document.getElementById("pokemon-attack5").value2 = 'Attack';
+          document.getElementById("pokemon-defense-value5").innerText = defenseStat;
+          document.getElementById("pokemon-defense5").value =  defenseStat;
+          document.getElementById("pokemon-defense5").value2 = 'Defense';
+          document.getElementById("pokemon-speed-value5").innerText = speedStat;
+          document.getElementById("pokemon-speed5").value =  speedStat;
+          document.getElementById("pokemon-speed5").value2 = 'Speed';
+          document.getElementById("pokemon-hp-value5").innerText = hpStat;
+          document.getElementById("pokemon-hp5").value =  hpStat;
+          document.getElementById("pokemon-hp5").value2 = 'HP';
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+      
+        let id6 = Math.floor(Math.random() * 1024 + 1);
+        fetch(`https://pokedex.mimo.dev/api/pokemon/${id6}`)
+        .then((response) => response.json())
+        .then((pokemon) => {
+          
+          for (let stat of pokemon.stats) {
+            if (stat.stat.name === "attack") {
+              attackStat = stat.base_stat;
+            }
+            if (stat.stat.name === "defense") {
+              defenseStat = stat.base_stat;
+            }
+            if (stat.stat.name === "speed") {
+              speedStat = stat.base_stat;
+            }
+            if (stat.stat.name === "hp") {
+              hpStat = stat.base_stat;
+            }
+            if (stat.stat.name === "special-attack") {
+              specialAttackStat = stat.base_stat;
+            }
+          }
+      
+          document.getElementById("pokemon-attack6").value =  attackStat;
+          document.getElementById("pokemon-defense6").value =  defenseStat;
+          document.getElementById("pokemon-speed6").value =  speedStat;
+          document.getElementById("pokemon-hp6").value =  hpStat;
+          document.getElementById("pokemon-attack6").value2 =  'Attack';
+          document.getElementById("pokemon-defense6").value2 = 'Defense';
+          document.getElementById("pokemon-speed6").value2 = 'Speed';
+          document.getElementById("pokemon-hp6").value2 =  'HP';
+        })
+        .catch((error) => console.error(`Error fetching Pokémon data:`, error));
+        deckOfCards = ['card1', 'card2', 'card3']
+        for (var i = 0, len = weapons.length; i < len; i++) {
+          weapons[i].style.display = 'flex';
+        }
+      
+        document.getElementById('card1').style.display = 'block';
+          document.getElementById('card2').style.display = 'block';
+          document.getElementById('card3').style.display = 'block';
+      })
+      
+      helpWhole.addEventListener('click', function() {
+        helpWhole.style.display = "none";
+        isBlur = !isBlur;
+        deckOfCards.forEach(card => {
+          document.getElementById(card).style.filter = 'blur(0)';
+        })
+      })
+      
+      helpImage.addEventListener('click', function() {
+        if (!isBlur) {
+          document.getElementById('help-whole').style.display = 'flex';
+          isBlur = !isBlur;
+      
+        }
+        else {
+          document.getElementById('help-whole').style.display = 'none';
+          isBlur = !isBlur;
+        }
+      })
+        
+      
+      function changeBackgroundImage() {
+          randomId = Math.floor(Math.random() * (pictureArray.length));
+          if (randomId != currentId) {
+              backgroundImage.src = pictureArray[randomId];
+              helpImage.style.backgroundImage = 'url(' + pictureArray[randomId] + ')';
+              currentId = randomId;
+          }
+          else {
+              randomId = Math.floor(Math.random() * (pictureArray.length));
+              helpImage.style.backgroundImage = 'url(' + pictureArray[randomId] + ')';
+          }
+      }
+      setInterval(changeBackgroundImage, 5000);
+  
+    </script>
+</body>
+</html>
+
